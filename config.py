@@ -10,13 +10,17 @@ CCW = 0   # Counterclockwise Rotation
 # Motor Pin Assignment
 MOTOR_PINS = {'X':{'DIR' :5,
                    'STEP':6,
-                   'MODE':(2,3,4)},
+                   'MODE':(2,3,4),
+                   'deg2mm': 1}, # This needs to be calibrated
               'Y':{'DIR' :23,
                    'STEP':24,
-                   'MODE':(10,9,11)},
+                   'MODE':(10,9,11),
+                   'deg2mm': 1}, # This needs to be calibrated
               'Z':{'DIR' :20,
                    'STEP':21,
-                   'MODE':(14,15,18)}}
+                   'MODE':(14,15,18),
+                   'deg2mm': 1}, # This needs to be calibrated
+             }
 
 # Raspberry Pi Pin Assignment
 
