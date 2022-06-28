@@ -8,3 +8,4 @@ def move_motor(XYZ, distance, resolution='Full', travel_time=1, wait_time=0.5):
     DIR=pins['DIR']
     STEP=pins['STEP']
     MODE=pins['MODE']
+    deg2mm=pins['deg2mm']
