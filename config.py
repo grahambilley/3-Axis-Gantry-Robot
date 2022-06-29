@@ -23,10 +23,16 @@ MOTOR_PINS = {'X':{'DIR' :5,
 # Raspberry Pi Pin Assignment
 
 # Resolution Dictionary for Stepper Motors
-RESOLUTION = {'Full': (0, 0, 0),
-              'Half': (1, 0, 0),
-              '1/4' : (0, 1, 0),
-              '1/8' : (1, 1, 0),
-              '1/16': (0, 0, 1),
-              '1/32': (1, 0, 1)}
+RESOLUTION = {'Full': {'MODE':(0, 0, 0),
+                       'count':1},
+              'Half': {'MODE':(0, 0, 1),   #(1, 0, 0)
+                       'count':2},
+              '1/4' : {'MODE':(0, 1, 0),
+                       'count':4},
+              '1/8' : {'MODE':(1, 1, 0),
+                       'count':8},
+              '1/16': {'MODE':(1, 0, 0),   #(0, 0, 1)
+                       'count':16},
+              '1/32': {'MODE':(1, 0, 1),
+                        'count':32}}
 
