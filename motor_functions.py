@@ -8,22 +8,31 @@ def move_motor(XYZ, direction, distance, resolution='Full', travel_time=1, wait_
     DIR=MOTOR_PINS[XYZ]['DIR']      # This is the GPIO pin corresponding to the Direction GPIO output
     STEP=MOTOR_PINS[XYZ]['STEP']    # This is the GPIO pin corresponding to the Step GPIO output
     MODE=MOTOR_PINS[XYZ]['MODE']    # This is the GPIO pin corresponding to the Step Size GPIO outputs
-    deg2mm=MOTOR_PARAMS[XYZ]['deg2mm']  # This corresponds to the pitc of the linear actuator
-    res=RESOLUTION[resolution]['mode']      # This corresponds to the way the MODE pins need to be pulsed to move the motor in different step sizes
-    step_per_revolution=SPR*RESOLUTION[resolution]['count']
+    deg_per_mm=MOTOR_PARAMS[XYZ]['deg2mm']  # This corresponds to the pitc of the linear actuator
+    res=RESOLUTION[resolution]['MODE']      # This corresponds to the way the MODE pins need to be pulsed to move the motor in different step sizes
+    steps_per_revolution=SPR*RESOLUTION[resolution]['count']
+    #effective_step_angle = step_angle/RESOLUTION[resolution]['count']
+    
+    # Number of degrees needed to move distance
+    deg=distance*deg_per_mm
+    # Convert degrees to total revolutions
+    rev=deg/360
+    # Convert to number of steps
+    step_count=rev*steps_per_revolution
+    #step_count=distance*deg_per_mm/effective_step_angle
     delay=travel_time/step_count
-
+    
+    dir=1 if direction=='CW' else 0
+    
+    GPIO.setmode(GPIO.BCM)
     GPIO.setup(DIR, GPIO.OUT)
     GPIO.setup(STEP, GPIO.OUT)
     GPIO.setup(MODE, GPIO.OUT)
     GPIO.output(MODE, res)
-    GPIO.output(DIR, direction)
-
-    # Calculate how many steps to move
-    step_count=distance*deg2mm/step_angle*RESOLUTION[resolution]['count']
+    GPIO.output(DIR, dir)
 
     # Pulse the GPIO pins to move the motor
-    for x in range(step_count):
+    for x in range(int(step_count)):
         GPIO.output(STEP, GPIO.HIGH)
         sleep(delay)
         GPIO.output(STEP, GPIO.LOW)
