@@ -1,8 +1,8 @@
 # Motor Parameters
 from sandbox import RESOLUTION
-MOTOR_PARAMS = {'X':{'deg2mm':1},
-                'Y':{'deg2mm':1},
-                'Z':{'deg2mm':1}}
+MOTOR_PARAMS = {'X':{'deg2mm':1.8},
+                'Y':{'deg2mm':1.8},
+                'Z':{'deg2mm':1.8}}
 
 step_angle = 1.8
 SPR = 360/step_angle # 200 Steps per Revolution with step angle of 1.8 degrees
