@@ -3,15 +3,21 @@ import RPi.GPIO as GPIO
 
 CW = 1    # Clockwise Rotation 
 CCW = 0   # Counterclockwise Rotation
-SPR = 200 # Steps per Revolution (Step angle of 1.8 degrees)
+SPR = 200 # Steps per Revolution in full-step mode (Step angle of 1.8 degrees)
 
 GPIO.setmode(GPIO.BCM)
-RESOLUTION = {'Full': (0, 0, 0),
-              'Half': (1, 0, 0),
-              '1/4' : (0, 1, 0),
-              '1/8' : (1, 1, 0),
-              '1/16': (0, 0, 1),
-              '1/32': (1, 0, 1)}
+RESOLUTION = {'Full': {'MODE':(0, 0, 0),
+                       'count':1},
+              'Half': {'MODE':(1, 0, 0),
+                       'count':2},
+              '1/4' : {'MODE':(0, 1, 0),
+                       'count':4},
+              '1/8' : {'MODE':(1, 1, 0),
+                       'count':8},
+              '1/16': {'MODE':(0, 0, 1),
+                       'count':16},
+              '1/32': {'MODE':(1, 0, 1),
+                        'count':32}}
 
 step_count = SPR*32
 delay = 1/step_count
