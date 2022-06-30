@@ -1,10 +1,10 @@
 # This .py file contains functions related to computer vision and image processing.
 
-import cv2
 import time
 import PIL as Image
 import numpy as np
-
+import cv2 # From package opencv-python
+import cv2.aruco as aruco # From package opencv-contrib-python
 
 
 def pixels_to_mm(pix):
