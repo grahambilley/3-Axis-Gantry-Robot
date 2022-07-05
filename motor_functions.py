@@ -40,4 +40,4 @@ def move_motor(XYZ, distance, resolution='Full', travel_time=1, wait_time=0.05):
 
 
 def move_to_home():
-    return NULL
+    return 
