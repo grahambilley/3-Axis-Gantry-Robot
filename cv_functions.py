@@ -82,16 +82,25 @@ def find_carts(img):
     circles = cv2.HoughCircles(img, cv2.HOUGH_GRADIENT, dp=1, minDist=40, param1=50, param2=40, minRadius=60, maxRadius=90)
     circles = np.uint16(np.around(circles))
     dispense_locations = np.round(np.array([circles[0][:,0],(circles[0][:,1]-0.6*circles[0][:,2])]).T).astype('int')
+
+    # This will dispense along one row of carts, then move down one row
+    d = dispense_locations
+    d = d[d[:, 1].argsort()]  # Sort by column value
+    d = np.hstack((d, np.concatenate([([i]*10) for i in range(10)], axis=0).reshape(100,1))) # Add group number
+    d = d[np.lexsort((d[:,0],d[:,2]))]  # Sort by row number within each group
+    
     for idx, i in enumerate(circles[0,:]):
         # draw the outer circle
         cv2.circle(cimg,center=(i[0],i[1]),radius=i[2],color=(0,255,0),thickness=5)
         # draw the center of the circle
         cv2.circle(cimg,center=(i[0],i[1]),radius=2,color=(0,0,255),thickness=8)
         # draw a tiny circle where the needle should dispense
-        cv2.circle(cimg,center=(dispense_locations[idx,0],dispense_locations[idx,1]),radius=1,color=(255,0,255),thickness=20)
+        cv2.circle(cimg,center=(d[idx,0],d[idx,1]),radius=1,color=(255,0,255),thickness=idx)
+
     compcimg = ResizeWithAspectRatio(cimg, width=1050)
-    test = findAruco(compcimg)
+    bbox, ids = findAruco(compcimg)
     cv2.imshow('detected circles',compcimg)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-    return circles, dispense_locations    
+    
+    return circles, d, bbox, ids
