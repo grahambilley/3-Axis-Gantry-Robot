@@ -103,3 +103,16 @@ def find_carts(img):
     cv2.destroyAllWindows()
     
     return circles, d, bbox, ids
+
+
+def make_dispensing_plan(d, home=[0,0]):
+    d=d[:,0:2]
+    d=np.insert(d, 0, home, axis=0)
+    moves=np.zeros((len(d)-1,2))
+    
+    # Create movement path
+    for i in range(len(d)-1):
+        moves[i,0] = d[i+1,0] - d[i,0]  # dX
+        moves[i,1] = d[i+1,1] - d[i,1]  # dY
+ 
+    return moves
