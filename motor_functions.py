@@ -1,6 +1,4 @@
 # This .py file contains the function definitions for controlling the stepper motors.
-
-from asyncio.windows_events import NULL
 import RPi.GPIO as GPIO
 from config import MOTOR_PINS, MOTOR_PARAMS, RESOLUTION, step_angle, SPR, CW, CCW
 from time import sleep
