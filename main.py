@@ -5,11 +5,13 @@ from motor_functions import move_motor, move_to_home
 
 # TAKE PICTURE OF CART TRAY
 print('Taking picture of tray...')
-carts = take_picture()
-print('Compressing picture for faster processing...')
-carts_compressed = ResizeWithAspectRatio(carts, width=1000)
+# carts = take_picture()
+imgName = 'Cart Tray with ArUco - Up Close.jpg'
+imagePath = f'./Pictures/{imgName}'
+img = cv2.imread(imagePath,0)
+
 print('Locating cart edges...')
-circles, dispense_locations, _ = find_carts(carts_compressed)
+circles, dispense_locations, _ = find_carts(img)
 
 # CREATE MOVEMENT PLAN
 print('Creating dispensing plan...')
