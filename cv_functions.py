@@ -1,5 +1,6 @@
 # This .py file contains functions related to computer vision and image processing.
 
+from pickle import NONE
 import time
 import PIL as Image
 import numpy as np
@@ -18,7 +19,7 @@ def mm_to_pixels(mm):
 
 
 # Take an picture from the webcam
-def take_picture(name='img1.png'):
+def take_picture(name='img1.png', savePic=False):
     cap = cv2.VideoCapture(1)
     if cap.isOpened():
         r, f = cap.read() # Initialize camera
@@ -26,7 +27,7 @@ def take_picture(name='img1.png'):
         ret, frame = cap.read()
         img1 = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)     
         im = Image.fromarray(img1)
-        im.save(name)
+        im.save(name) if savePic == True else NONE
         cap.release()
         return im
     else:
