@@ -1,5 +1,6 @@
 # INITIALIZATION
 print('Initializing...')
+import cv2
 from cv_functions import make_dispensing_plan, take_picture, findAruco, ResizeWithAspectRatio, find_carts, pixels_to_mm, mm_to_pixels
 from motor_functions import move_motor, move_to_home
 
