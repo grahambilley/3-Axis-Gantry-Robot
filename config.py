@@ -1,5 +1,4 @@
 # Motor Parameters
-from sandbox import RESOLUTION
 MOTOR_PARAMS = {'X':{'deg2mm':1.8},
                 'Y':{'deg2mm':1.8},
                 'Z':{'deg2mm':1.8}}
