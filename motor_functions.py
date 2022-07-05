@@ -1,5 +1,6 @@
 # This .py file contains the function definitions for controlling the stepper motors.
 
+from asyncio.windows_events import NULL
 import RPi.GPIO as GPIO
 from config import MOTOR_PINS, MOTOR_PARAMS, RESOLUTION, step_angle, SPR, CW, CCW
 from time import sleep
@@ -12,7 +13,6 @@ def move_motor(XYZ, distance, resolution='Full', travel_time=1, wait_time=0.05):
     res=RESOLUTION[resolution]['MODE']      # This corresponds to the way the MODE pins need to be pulsed to move the motor in different step sizes
     steps_per_revolution=SPR*RESOLUTION[resolution]['count']
    
-    
     # Number of degrees needed to move distance
     deg=distance*deg_per_mm
     # Convert degrees to total revolutions
@@ -40,3 +40,6 @@ def move_motor(XYZ, distance, resolution='Full', travel_time=1, wait_time=0.05):
     sleep(wait_time)
     GPIO.cleanup()
 
+
+def move_to_home():
+    return NULL
