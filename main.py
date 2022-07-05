@@ -6,9 +6,9 @@ from cv_functions import take_picture, findAruco, ResizeWithAspectRatio, find_ca
 
 
 # TAKE PICTURE OF CART TRAY
-
-
-
+carts = take_picture()
+carts_compressed = ResizeWithAspectRatio(carts, width=1000)
+circles, dispense_locations = find_carts(carts_compressed)
 
 
 
